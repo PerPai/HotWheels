@@ -1,0 +1,66 @@
+<body
+  style="
+    background-image: url('../../../assets/img/login.jpg');
+    background-size: cover;
+  "
+>
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="active">Sign In</h2>
+
+      <h2 class="inactive underlineHover">
+        <a href="/register" style="text-decoration: none; color: #cccccc"
+          ><b>Sign Up</b></a
+        >
+      </h2>
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <img
+          src="../../../assets/img/Hot_Wheels_Logo154x68.png"
+          id="icon"
+          alt="User Icon"
+          style="width: 180px"
+        />
+      </div>
+
+      <!-- Login Form -->
+      <form [formGroup]="frmLogin" id="frmLogin" (submit)="onSubmit()">
+        <input
+          type="text"
+          id="idUsuario"
+          class="fadeIn second"
+          name="login"
+          placeholder="User"
+          formControlName="idUsuario"
+        />
+        <input
+          type="password"
+          id="passw"
+          class="fadeIn third"
+          name="login"
+          placeholder="Password"
+          formControlName="passw"
+        />
+
+        <input
+          type="submit"
+          class="fadeIn fourth"
+          value="Log In"
+          form="frmLogin"
+          [disabled]="frmLogin.invalid"
+        />
+
+        <div class="alert alert-danger" *ngIf="errorLogin">
+          Usuario o Contraseña no válido
+        </div>
+      </form>
+
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="#">Forgot Password?</a>
+      </div>
+    </div>
+      
+  </div>
+</body>

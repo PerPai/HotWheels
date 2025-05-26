@@ -1,0 +1,100 @@
+<app-nav-bar></app-nav-bar>
+<body
+  style="
+    background-image: url('../../../assets/img/bgpassw2.png');
+    background-size: cover;
+  "
+>
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      
+      <h2 class="active">Change Password</h2>
+
+      <div class="fadeIn first">
+        <img
+          src="../../../assets/img/Hot_Wheels_Logo154x68.png"
+          id="icon"
+          alt="User Icon"
+          style="width: 180px"
+        />
+      </div>
+
+      <!-- Login Form -->
+      <form
+        [formGroup]="frmChangePassw"
+        id="frmChangePassw"
+        (submit)="onSubmit()"
+      >
+        <input
+          type="text"
+          id="passw"
+          class="fadeIn second"
+          name="passw"
+          placeholder="Password"
+          formControlName="passw"
+        />
+        <div
+          class="alert alert-danger"
+          *ngIf="F['passw'].invalid && F['passw'].touched"
+        >
+          <div *ngIf="F['passw'].errors!['required']">
+            Este campo es Obligatorio
+          </div>
+        </div>
+
+        <input
+          type="text"
+          id="passwN"
+          class="fadeIn third"
+          name="passwN"
+          placeholder="New Password"
+          formControlName="passwN"
+        />
+        <div
+          class="alert alert-danger"
+          *ngIf="F['passwN'].invalid && F['passwN'].touched"
+        >
+          <div *ngIf="F['passwN'].errors!['required']">
+            Este campo es Obligatorio.
+          </div>
+          <div *ngIf="F['passwN'].errors!['passwordStrength']">
+            La contraseña debe contener mayúsculas, minúsculas, números y
+            caracteres especiales ($,%,@,#,*).
+          </div>
+          <div *ngIf="F['passwN'].errors!['minlength']">
+            La contraseña debe tener almenos 8 caracteres.
+          </div>
+        </div>
+
+        <input
+          type="text"
+          id="passwR"
+          class="fadeIn third"
+          name="passwR"
+          placeholder="Repeat Password"
+          formControlName="passwR"
+        />
+        <div
+          class="alert alert-danger"
+          *ngIf="F['passwR'].invalid && F['passwR'].touched"
+        >
+          <div *ngIf="F['passwR'].errors!['required']">
+            Este campo es Obligatorio
+          </div>
+          <div *ngIf="F['passwR'].errors!['notEquals']">
+            Las contraseña deben ser iguales
+          </div>
+        </div>
+
+        <input
+          type="submit"
+          class="fadeIn fourth"
+          value="Change"
+          form="frmChangePassw"
+          [disabled]="frmChangePassw.invalid"
+        />
+      </form>
+    </div>
+      
+  </div>
+</body>

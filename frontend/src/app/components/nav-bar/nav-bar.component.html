@@ -1,0 +1,276 @@
+<link
+  href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
+  rel="stylesheet"
+/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<nav
+  class="navbar navbar-expand-lg navbar-light"
+  style="background-color: #009cde"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="../../../assets/img/Hot_Wheels_Logo154x68.png" alt="" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" [routerLink]="['/home']"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/productos']">Products</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Categories
+          </a>
+          <ul class="dropdown-menu submenu-item">
+            <li>
+              <a
+                class="dropdown-item submenu-item no-hover"
+                [routerLink]="['/productos/control-remoto']"
+                ><fa-icon [icon]="['fas', 'gamepad']" class="m-2"></fa-icon
+                >Remote Control</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                class="dropdown-item submenu-item no-hover"
+                [routerLink]="['/productos/exclusivo']"
+                ><fa-icon [icon]="['fas', 'circle-check']" class="m-2"></fa-icon
+                >Exclusive</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                class="dropdown-item submenu-item no-hover"
+                [routerLink]="['/productos/monster-truck']"
+                ><fa-icon
+                  [icon]="['fas', 'truck-monster']"
+                  class="m-2"
+                ></fa-icon
+                >Monster Truck</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                class="dropdown-item submenu-item no-hover"
+                [routerLink]="['/productos/coleccion']"
+                ><fa-icon
+                  [icon]="['fas', 'check-to-slot']"
+                  class="m-2"
+                ></fa-icon
+                >Collection</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                class="dropdown-item submenu-item no-hover"
+                [routerLink]="['/productos/articulos']"
+                ><fa-icon [icon]="['fas', 'shirt']" class="m-2"></fa-icon
+                >Articles</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                class="dropdown-item submenu-item no-hover"
+                [routerLink]="['/productos/entretenimiento']"
+                ><fa-icon [icon]="['fas', 'clapperboard']" class="m-2"></fa-icon
+                >Entertainment</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            *ngIf="
+              mostrarSeccionShop() === true ||
+              mostrarSeccionCrudProductos() === true
+            "
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Shop
+          </a>
+          <ul class="dropdown-menu submenu-item">
+            <li>
+              <a
+                class="dropdown-item submenu-item no-hover"
+                *ngIf="mostrarSeccionShop() === true"
+                [routerLink]="['/cliente']"
+                ><fa-icon [icon]="['fas', 'users']" class="m-2"></fa-icon>Manage
+                Clients</a
+              >
+            </li>
+            <li>
+              <hr
+                class="dropdown-divider"
+                *ngIf="mostrarSeccionShop() === true"
+              />
+            </li>
+            <li>
+              <a
+                class="dropdown-item submenu-item no-hover"
+                *ngIf="
+                  mostrarSeccionCrudProductos() === true ||
+                  mostrarSeccionShop() === true
+                "
+                [routerLink]="['/articulo']"
+                ><fa-icon [icon]="['fas', 'box-open']" class="m-2"></fa-icon
+                >Manage Products</a
+              >
+            </li>
+            <li>
+              <hr
+                class="dropdown-divider"
+                *ngIf="mostrarSeccionShop() === true"
+              />
+            </li>
+            <li>
+              <a
+                class="dropdown-item submenu-item no-hover"
+                *ngIf="mostrarSeccionShop() === true"
+                [routerLink]="['/proveedor']"
+                ><fa-icon
+                  [icon]="['fas', 'boxes-packing']"
+                  class="m-2"
+                ></fa-icon
+                >Manage Providers</a
+              >
+            </li>
+            <li>
+              <hr
+                class="dropdown-divider"
+                *ngIf="mostrarSeccionShop() === true"
+              />
+            </li>
+            <li>
+              <a
+                class="dropdown-item submenu-item no-hover"
+                *ngIf="mostrarSeccionShop() === true"
+                [routerLink]="['/rol']"
+                ><fa-icon [icon]="['fas', 'gears']" class="m-2"></fa-icon>Manage
+                Roles</a
+              >
+            </li>
+            <li>
+              <hr
+                class="dropdown-divider"
+                *ngIf="mostrarSeccionShop() === true"
+              />
+            </li>
+            <li>
+              <a
+                class="dropdown-item submenu-item no-hover"
+                *ngIf="mostrarSeccionShop() === true"
+                [routerLink]="['/categoria']"
+                ><fa-icon
+                  [icon]="['fas', 'rectangle-list']"
+                  class="m-2"
+                ></fa-icon
+                >Manage Categories</a
+              >
+            </li>
+            <li>
+              <hr
+                class="dropdown-divider"
+                *ngIf="mostrarSeccionShop() === true"
+              />
+            </li>
+            <li>
+              <a
+                class="dropdown-item submenu-item no-hover"
+                *ngIf="mostrarSeccionShop() === true"
+                [routerLink]="['/user']"
+                ><fa-icon [icon]="['fas', 'users-gear']" class="m-2"></fa-icon
+                >Manage Users</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control rounded-pill"
+              placeholder="Search"
+              style="width: 300px"
+            />
+            <button
+              class="btn rounded-start"
+              type="button"
+              style="color: white"
+            >
+              <fa-icon icon="magnifying-glass"></fa-icon>
+            </button>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/carrito'">
+            <i><fa-icon icon="shopping-cart"></fa-icon></i>
+            <div class="badge bg-danger">{{ totalItem }}</div>
+          </a>
+        </li>
+
+        <div class="btn-group dropright" *ngIf="usuario">
+          <button
+            type="button"
+            class="btn dropdown-toggle custom-button"
+            data-bs-toggle="dropdown"
+          >
+            <fa-icon [icon]="['fas', 'user']"></fa-icon> {{ usuario }}
+          </button>
+          <ul
+            class="dropdown-menu custom-dropdown-menu"
+            style="background-color: #009cde; right: auto; left: -100%"
+          >
+            <li>
+              <a [routerLink]="['/changePassw']" class="dropdown-item no-hover"
+                ><fa-icon [icon]="['fas', 'lock']" class="m-2"></fa-icon
+                >Password</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a href="" class="dropdown-item no-hover" (click)="onSalir()"
+                ><fa-icon
+                  [icon]="['fas', 'right-from-bracket']"
+                  class="m-2"
+                ></fa-icon
+                >Exit</a
+              >
+            </li>
+          </ul>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>

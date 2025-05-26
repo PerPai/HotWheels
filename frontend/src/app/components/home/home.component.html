@@ -1,0 +1,112 @@
+<link
+  href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
+  rel="stylesheet"
+/>
+<app-nav-bar></app-nav-bar>
+<body>
+  
+
+  <div class="image-container position-relative">
+    <h2 class="text-image">SEE THE EXCLUSIVE NOW!</h2>
+    <img src="../../../assets/img/carrousel-7.jpg" alt="" class="img-fluid" />
+    <button
+      class="btn btn-primary btn-overlay2"
+      [routerLink]="['/productos/exclusivo']"
+    >
+      <b>SHOW EXCLUSIVES</b>
+    </button>
+  </div>
+
+  <div class="image-container2">
+    <h2 class="text-image2">NEW AMAZING COLLECTIONS!</h2>
+    <img
+      src="../../../assets/img/home-1.jpg"
+      id="img"
+      class="img-fluid right"
+    />
+    <button
+      class="btn btn-primary btn-overlay3"
+      [routerLink]="['/productos/coleccion']"
+    >
+      <b>SHOW COLLECTIONS</b>
+    </button>
+    <img src="../../../assets/img/home-2.gif" id="img" class="img-fluid left" />
+  </div>
+
+  <div class="image-container position-relative">
+    <h2 class="text-image3">NEW CHALLENGES TO DO!</h2>
+    <img src="../../../assets/img/home-4.jpg" alt="" class="img-fluid" />
+    <button
+      class="btn btn-primary btn-overlay1"
+      [routerLink]="['/productos/exclusivo']"
+    >
+      <b>SHOW CHALLENGES</b>
+    </button>
+  </div>
+</body>
+<footer class="container-fluid bg-grey py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="logo-part">
+              <img
+                src="../../../assets/img/Hot_Wheels_Logo154x68.png"
+                class="w-50 logo-footer"
+              />
+              <p>7637 Laurel Dr. King Of Prussia, PA 19406</p>
+              <p>
+                Use this tool as test data for an automated system or find your
+                next pen
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 px-4">
+            <h6>About Company</h6>
+            <p>But horizontal lines can only be a full pixel high.</p>
+            <a href="#" class="btn-footer"> More Info </a><br />
+            <a href="#" class="btn-footer"> Contact Us</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6 px-4">
+            <h6>Help us</h6>
+            <div class="row">
+              <div class="col-md-6">
+                <ul>
+                  <li><a href="#"> Home</a></li>
+                  <li><a href="#"> About</a></li>
+                  <li><a href="#"> Service</a></li>
+                  <li><a href="#"> Team</a></li>
+                  <li><a href="#"> Help</a></li>
+                  <li><a href="#"> Contact</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 px-4">
+                <ul>
+                  <li><a href="#"> Cab Faciliy</a></li>
+                  <li><a href="#"> Fax</a></li>
+                  <li><a href="#"> Terms</a></li>
+                  <li><a href="#"> Policy</a></li>
+                  <li><a href="#"> Refunds</a></li>
+                  <li><a href="#"> Paypal</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h6>Newsletter</h6>
+            <form class="form-footer my-3">
+              <input type="text" placeholder="search here...." name="search" />
+              <input type="button" value="Go" />
+            </form>
+            <p>That's technology limitation of LCD monitors</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

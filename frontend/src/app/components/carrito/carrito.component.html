@@ -1,0 +1,235 @@
+<app-nav-bar></app-nav-bar>
+
+<ng-container *ngIf="products.length == 0">
+  <div class="container">
+    <div class="card">
+      <div class="center">
+        <img src="../../../assets/img/emptycart.png" alt="" />
+        <h4>Your cart is empty</h4>
+        <h5>Add items to it now</h5>
+        <button class="btn btn-primary shop-now" [routerLink]="'/productos'">
+          Shop Now
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="products.length != 0">
+  <section class="h-100 h-custom">
+    <div class="container h-100 py-5">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="h5">Shopping Bag</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Subtotal Product</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of products; let i = index">
+                  <th scope="row">
+                    <div class="d-flex align-items-center">
+                      <div style="margin-right: 30px">{{ i + 1 }}</div>
+                      <img
+                        src="{{ item.imagen1 }}"
+                        class="img-fluid rounded-3"
+                        style="width: 120px"
+                      />
+                      <div class="flex-column ms-4">
+                        <p class="mb-2">{{ item.nombre }}</p>
+                      </div>
+                    </div>
+                  </th>
+                  <td class="align-middle">
+                    <p class="mb-0" style="font-weight: 500">
+                      ${{ item.precio }}
+                    </p>
+                  </td>
+                  <td class="align-middle">
+                    <div class="d-flex flex-row">
+                      <input
+                        id="form1"
+                        min="0"
+                        name="quantity"
+                        [ngModel]="item && item.cantidad"
+                        (ngModelChange)="updateQuantity(item, $event)"
+                        type="number"
+                        class="form-control form-control-sm"
+                        style="width: 50px"
+                      />
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <p class="mb-0" style="font-weight: 500">
+                      ${{ item.total }}
+                    </p>
+                  </td>
+
+                  <td class="align-middle">
+                    <button class="btn btn-danger" (click)="removeItem(item)">
+                      <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div
+            class="card shadow-2-strong mb-5 mb-lg-0"
+            style="border-radius: 16px; margin-bottom: 50px"
+          >
+            <div class="card-body p-4">
+              <div class="row justify-content-end">
+                <div class="col-lg-4 col-xl-3">
+                  <div
+                    class="d-flex justify-content-between"
+                    style="font-weight: 500"
+                  >
+                    <p class="mb-2">Subtotal</p>
+                    <p class="mb-2">
+                      {{ grandTotal | currency : "USD" : true }}
+                    </p>
+                  </div>
+
+                  <div
+                    class="d-flex justify-content-between"
+                    style="font-weight: 500"
+                  >
+                    <p class="mb-0">Shipping</p>
+                    <p class="mb-0">$0.00</p>
+                  </div>
+
+                  <hr class="my-4" />
+
+                  <div
+                    class="d-flex justify-content-between mb-4"
+                    style="font-weight: 500"
+                  >
+                    <p class="mb-2">Total (tax included)</p>
+                    <p class="mb-2">${{ grandTotal }}</p>
+                  </div>
+
+                  <div class="d-flex justify-content-center">
+                    <div class="my-2" style="margin-right: 10px">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-danger btn-block"
+                        (click)="emptyCart()"
+                      >
+                        <div
+                          class="d-flex justify-content-between align-items-center"
+                        >
+                          <span
+                            ><i
+                              ><fa-icon [icon]="['fas', 'trash']"></fa-icon
+                            ></i>
+                            <b>Empty Cart</b></span
+                          >
+                        </div>
+                      </button>
+                    </div>
+
+                    <div class="my-2">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-success btn-block"
+                      >
+                        <div
+                          class="d-flex justify-content-between align-items-center"
+                        >
+                          <span
+                            ><i
+                              ><fa-icon
+                                [icon]="['fas', 'cart-shopping']"
+                              ></fa-icon
+                            ></i>
+                            <b>Checkout</b>
+                          </span>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-container>
+
+<footer class="container-fluid bg-grey py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="logo-part">
+              <img
+                src="../../../assets/img/Hot_Wheels_Logo154x68.png"
+                class="w-50 logo-footer"
+              />
+              <p>7637 Laurel Dr. King Of Prussia, PA 19406</p>
+              <p>
+                Use this tool as test data for an automated system or find your
+                next pen
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 px-4">
+            <h6>About Company</h6>
+            <p>But horizontal lines can only be a full pixel high.</p>
+            <a href="#" class="btn-footer"> More Info </a><br />
+            <a href="#" class="btn-footer"> Contact Us</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6 px-4">
+            <h6>Help us</h6>
+            <div class="row">
+              <div class="col-md-6">
+                <ul>
+                  <li><a href="#"> Home</a></li>
+                  <li><a href="#"> About</a></li>
+                  <li><a href="#"> Service</a></li>
+                  <li><a href="#"> Team</a></li>
+                  <li><a href="#"> Help</a></li>
+                  <li><a href="#"> Contact</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 px-4">
+                <ul>
+                  <li><a href="#"> Cab Faciliy</a></li>
+                  <li><a href="#"> Fax</a></li>
+                  <li><a href="#"> Terms</a></li>
+                  <li><a href="#"> Policy</a></li>
+                  <li><a href="#"> Refunds</a></li>
+                  <li><a href="#"> Paypal</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h6>Newsletter</h6>
+            <form class="form-footer my-3">
+              <input type="text" placeholder="search here...." name="search" />
+              <input type="button" value="Go" />
+            </form>
+            <p>That's technology limitation of LCD monitors</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,101 @@
+<body
+  style="
+    background-image: url('../../../assets/img/login.jpg');
+    background-size: cover;
+  "
+>
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="inactive underlineHover">
+        <a href="/login" style="text-decoration: none; color: #cccccc"
+          ><b>Sign In</b></a
+        >
+      </h2>
+
+      <h2 class="active">Sign Up</h2>
+
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <img
+          src="../../../assets/img/Hot_Wheels_Logo154x68.png"
+          id="icon"
+          alt="User Icon"
+          style="width: 180px"
+        />
+      </div>
+
+      <!-- Registration Form -->
+      <form id="frmCliente" [formGroup]="frmCliente" (ngSubmit)="onSubmit()">
+        <input
+          type="text"
+          id="idPersona"
+          class="fadeIn second"
+          name="idPersona"
+          placeholder="ID"
+          formControlName="idPersona"
+        />
+        <input
+          type="text"
+          id="nombre"
+          class="fadeIn third"
+          name="nombre"
+          placeholder="Nombre"
+          formControlName="nombre"
+        />
+        <input
+          type="text"
+          id="apellidoUno"
+          class="fadeIn third"
+          name="apellido1"
+          placeholder="Primer Apellido"
+          formControlName="apellidoUno"
+        />
+        <input
+          type="text"
+          id="apellidoDos"
+          class="fadeIn third"
+          name="apellido2"
+          placeholder="Segundo Apellido"
+          formControlName="apellidoDos"
+        />
+        <input
+          type="text"
+          id="celular"
+          class="fadeIn third"
+          name="celular"
+          placeholder="Celular"
+          formControlName="celular"
+        />
+        <input
+          type="text"
+          id="correo"
+          class="fadeIn third"
+          name="correo"
+          placeholder="Email"
+          formControlName="correo"
+        />
+
+        <input
+          type="password"
+          id="passwF"
+          class="fadeIn third"
+          name="passwF"
+          placeholder="Password"
+          formControlName="passwF"
+        />
+
+        <input type="hidden" formControlName="id" id="id" name="id" />
+
+        <input
+          type="submit"
+          class="fadeIn fourth"
+          value="Register"
+          form="frmCliente"
+          [disabled]="frmCliente.invalid"
+        />
+
+      </form>
+    </div>
+  </div>
+</body>

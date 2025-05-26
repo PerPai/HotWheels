@@ -1,0 +1,45 @@
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+.navbar {
+  font-family: "Staatliches", cursive;
+}
+
+.navbar a {
+  color: white;
+}
+
+.submenu-item {
+  background-color: #009cde;
+  border: 0;
+}
+
+/* Estilos para el botón del menú */
+.navbar-toggler {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  outline: none;
+  align-items: center;
+}
+
+.no-hover:hover {
+  background-color: #009cde;
+  color: white;
+  text-decoration: underline white;
+}
+
+.custom-button {
+  color: white;
+  border: 1px solid white;
+}

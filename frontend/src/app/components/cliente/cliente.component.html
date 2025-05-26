@@ -1,0 +1,422 @@
+<app-nav-bar></app-nav-bar>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+/>
+
+<div class="container">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-xs-3">
+            <h2
+              style="
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                margin-top: 65px;
+              "
+            >
+              Manage <b>Clients</b>
+            </h2>
+          </div>
+
+          <div class="col-xs-6">
+            <button
+              class="btn btn-danger"
+              (click)="onNuevo()"
+              data-bs-toggle="modal"
+              data-bs-target="#ventanaCliente"
+            >
+              <i class="material-icons">&#xE147;</i>
+              <span><b>Add New Client</b></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid" [@estadoFiltro]="stateFiltro">
+        <form>
+          <div class="d-flex">
+            <input
+              type="text"
+              class="form-control me-2"
+              placeholder="ID Cliente"
+              #fIdCliente
+              (keyup)="
+                onFiltroChange({
+                  idCliente: fIdCliente.value,
+                  nombre: fNombre.value,
+                  apellido1: fApe1.value,
+                  apellido2: fApe2.value
+                })
+              "
+            />
+            <input
+              type="text"
+              class="form-control me-2"
+              placeholder="Nombre"
+              #fNombre
+              (keyup)="
+                onFiltroChange({
+                  idCliente: fIdCliente.value,
+                  nombre: fNombre.value,
+                  apellido1: fApe1.value,
+                  apellido2: fApe2.value
+                })
+              "
+            />
+            <input
+              type="text"
+              class="form-control me-2"
+              placeholder="Primer Apellido"
+              #fApe1
+              (keyup)="
+                onFiltroChange({
+                  idCliente: fIdCliente.value,
+                  nombre: fNombre.value,
+                  apellido1: fApe1.value,
+                  apellido2: fApe2.value
+                })
+              "
+            />
+            <input
+              type="text"
+              class="form-control me-2"
+              placeholder="Segundo Apellido"
+              #fApe2
+              (keyup)="
+                onFiltroChange({
+                  idCliente: fIdCliente.value,
+                  nombre: fNombre.value,
+                  apellido1: fApe1.value,
+                  apellido2: fApe2.value
+                })
+              "
+            />
+
+            <button class="btn btn-danger" (click)="onFiltrar()">
+              <fa-icon [icon]="['fas', 'circle-xmark']"></fa-icon>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="table-wrapper">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Surname</th>
+              <th scope="col">Second Surname</th>
+              <th scope="col">E-Mail</th>
+              <th scope="col">Phone</th>
+
+              <th scope="col"></th>
+              <th scope="col">Acciones</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr
+              *ngFor="
+                let item of clientes
+                  | paginate
+                    : {
+                        itemsPerPage: itemsPPags,
+                        currentPage: pagActual,
+                        totalItems: numRegs
+                      }
+              "
+            >
+              <th scope="row">{{ item.idPersona }}</th>
+              <td>{{ item.nombre }}</td>
+              <td>{{ item.apellidoUno }}</td>
+              <td>{{ item.apellidoDos }}</td>
+              <td>{{ item.correo }}</td>
+              <td>{{ item.celular }}</td>
+              <td class="text-center">
+                <button
+                  class="btn btn-warning"
+                  (click)="onEditar(item.id)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#ventanaCliente"
+                >
+                  <fa-icon [icon]="['fas', 'pencil']"></fa-icon>
+                </button>
+              </td>
+              <td class="text-center">
+                <button
+                  class="btn btn-danger"
+                  (click)="
+                    onEliminar(
+                      item.id,
+                      item.nombre +
+                        ' ' +
+                        item.apellidoUno +
+                        ' ' +
+                        item.apellidoDos
+                    )
+                  "
+                >
+                  <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+                </button>
+              </td>
+              <td class="text-center">
+                <button class="btn btn-primary" (click)="onInfo(item.id)">
+                  <fa-icon [icon]="['fas', 'circle-info']"></fa-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card-footer d-flex justify-content-between pt-4">
+        <div class="d-flex">
+          <div class="me-2">
+            <select
+              class="form-select form-select-sm"
+              (change)="onCambioTama($event)"
+            >
+              <option
+                *ngFor="let tama of paginas"
+                [ngValue]="tama"
+                [selected]="tama === itemsPPags"
+              >
+                {{ tama }}
+              </option>
+            </select>
+          </div>
+
+          <pagination-controls
+            (pageChange)="onCambioPag($event)"
+            previousLabel=""
+            nextLabel=""
+          >
+          </pagination-controls>
+
+          <nav aria-label="Page navigation example"></nav>
+        </div>
+
+        <div class="buttons">
+          <button class="btn btn-filtrar btn-sm me-2" (click)="onFiltrar()">
+            <fa-icon [icon]="['fas', 'magnifying-glass']"></fa-icon> Filtrar
+          </button>
+          <button class="btn btn-inf btn-sm me-2" (click)="onImprimir()">
+            <fa-icon [icon]="['fas', 'print']"></fa-icon> Imprimir
+          </button>
+          <button class="btn btn-cerrar btn-sm" (click)="onCerrar()">
+            <fa-icon [icon]="['fas', 'circle-xmark']"></fa-icon> Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal HTML -->
+<div
+  id="ventanaCliente"
+  class="modal fade"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ titulo }}</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="frmCliente" [formGroup]="frmCliente" (ngSubmit)="onSubmit()">
+          <div class="row mb-2">
+            <label for="idPersona" class="col-sm-3 col-form-label"
+              >ID Cliente</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id="idPersona"
+                formControlName="idPersona"
+              />
+              <div
+                class="alert alert-danger"
+                *ngIf="F['idPersona'].invalid && F['idPersona'].touched"
+              >
+                <div *ngIf="F['idPersona'].errors!['required']">
+                  Este campo es Obligatorio
+                </div>
+                <div *ngIf="F['idPersona'].errors!['minlength']">
+                  Debe ser de al menos 9 digitos
+                </div>
+                <div *ngIf="F['idPersona'].errors!['maxlength']">
+                  Debe ser de como Max 15 digitos
+                </div>
+                <div *ngIf="F['idPersona'].errors!['pattern']">
+                  Este campo solo acepta Números
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id="nombre"
+                formControlName="nombre"
+              />
+              <div
+                class="alert alert-danger"
+                *ngIf="F['nombre'].invalid && F['nombre'].touched"
+              >
+                <div *ngIf="F['nombre'].errors!['required']">
+                  Este campo es Obligatorio
+                </div>
+                <div *ngIf="F['nombre'].errors!['minlength']">
+                  Debe contener 3 letras
+                </div>
+                <div *ngIf="F['nombre'].errors!['maxlength']">
+                  No puede superar los 30 caracteres
+                </div>
+                <div *ngIf="F['nombre'].errors!['pattern']">
+                  Caracter no valido en el Nombre
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <label for="apellidoUno" class="col-sm-3 col-form-label"
+              >Primer Apellido</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id="apellidoUno"
+                formControlName="apellidoUno"
+              />
+              <div
+                class="alert alert-danger"
+                *ngIf="F['apellidoUno'].invalid && F['apellidoUno'].touched"
+              >
+                <div *ngIf="F['apellidoUno'].errors!['required']">
+                  Este campo es Obligatorio
+                </div>
+                <div *ngIf="F['apellidoUno'].errors!['minlength']">
+                  Debe contener 2 letras
+                </div>
+                <div *ngIf="F['apellidoUno'].errors!['maxlength']">
+                  No puede superar los 15 caracteres
+                </div>
+                <div *ngIf="F['apellidoUno'].errors!['pattern']">
+                  Caracter no valido en el Apellido
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label for="apellidoDos" class="col-sm-3 col-form-label"
+              >Segundo Apellido</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id="apellidoDos"
+                formControlName="apellidoDos"
+              />
+              <div
+                class="alert alert-danger"
+                *ngIf="F['apellidoDos'].invalid && F['apellidoDos'].touched"
+              >
+                <div *ngIf="F['apellidoDos'].errors!['required']">
+                  Este campo es Obligatorio
+                </div>
+                <div *ngIf="F['apellidoDos'].errors!['minlength']">
+                  Debe contener 2 letras
+                </div>
+                <div *ngIf="F['apellidoDos'].errors!['maxlength']">
+                  No puede superar los 15 caracteres
+                </div>
+                <div *ngIf="F['apellidoDos'].errors!['pattern']">
+                  Caracter no valido en el Apellido
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <label for="correo" class="col-sm-3 col-form-label">E-mail</label>
+            <div class="col-sm-9">
+              <input
+                type="mail"
+                class="form-control"
+                id="correo"
+                formControlName="correo"
+              />
+              <div
+                class="alert alert-danger"
+                *ngIf="F['correo'].invalid && F['correo'].touched"
+              >
+                <div *ngIf="F['correo'].errors!['required']">
+                  Este campo es Obligatorio
+                </div>
+                <div *ngIf="F['correo'].errors!['email']">
+                  Este campo va con @
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <label for="celular" class="col-sm-3 col-form-label">Celular</label>
+            <div class="col-sm-9">
+              <input
+                type="tel"
+                class="form-control"
+                id="celular"
+                formControlName="celular"
+              />
+              <div
+                class="alert alert-danger"
+                *ngIf="F['celular'].invalid && F['celular'].touched"
+              >
+                <div *ngIf="F['celular'].errors!['pattern']">
+                  Caracter no valido en el Celular
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <input type="hidden" formControlName="id" />
+        </form>
+      </div>
+
+      <div class="modal-footer" style="background-color: white">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          form="frmCliente"
+          [disabled]="frmCliente.invalid"
+        >
+          Guardar
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
